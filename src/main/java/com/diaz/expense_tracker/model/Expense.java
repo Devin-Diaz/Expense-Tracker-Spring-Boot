@@ -31,4 +31,6 @@ public class Expense {
     @JoinColumn(name = "budget_id")
     private Budget budget;
 
+
+
 }
