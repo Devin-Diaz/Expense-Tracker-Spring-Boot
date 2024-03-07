@@ -20,11 +20,11 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "total budget")
+    @Column(name = "total_budget")
     private BigDecimal totalBudgetAmount;
 
     @ManyToOne
-    @JoinColumn("user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)

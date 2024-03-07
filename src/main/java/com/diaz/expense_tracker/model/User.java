@@ -34,7 +34,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Budget> budgets;
 
-    // One-to-Many relationship with Expense
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Expense> expenses;
 }
