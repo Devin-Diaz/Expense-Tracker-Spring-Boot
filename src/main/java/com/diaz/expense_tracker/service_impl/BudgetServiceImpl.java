@@ -1,4 +1,4 @@
-package com.diaz.expense_tracker.impl;
+package com.diaz.expense_tracker.service_impl;
 
 import com.diaz.expense_tracker.Repository.BudgetRepository;
 import com.diaz.expense_tracker.model.Budget;

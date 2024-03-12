@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+</head>
+<body>
+
+    <!--this redirect attribute is working successfully but warning appears. Ignore for now-->
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}" style="color: green;"></p>
+    </div>
+
+    <form th:action="@{/login}" method="post">
+
+        <input type="text" name="email" placeholder="Please Enter Email: " required>
+        <input type="text" name="password" placeholder="Please Enter Password: " required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p th:if="${param.error}" style="color: red;">Invalid Email or Password.</p>
+
+</body>
+</html>
