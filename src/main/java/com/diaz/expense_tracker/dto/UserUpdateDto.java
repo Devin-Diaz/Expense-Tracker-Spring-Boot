@@ -10,7 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UpdateUserDto {
+public class UserUpdateDto {
+
+    private Long id;
 
     private String firstName;
 
