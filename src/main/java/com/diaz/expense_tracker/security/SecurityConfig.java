@@ -3,6 +3,7 @@ package com.diaz.expense_tracker.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -31,9 +32,14 @@ thus protecting against CSRF vulnerabilities. */
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class).build();
+    }
 
 
     // filterChain method sets up the specific security rules for entering the club:
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -73,12 +79,10 @@ public class SecurityConfig {
     checking these unique codes using a special system (AuthenticationManager) to decide if someone can proceed to the
     sign-in sheet or main hall. */
     @Bean
-    public CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter(HttpSecurity http) throws Exception {
-
-        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+    public CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) throws Exception {
         CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter();
         filter.setAuthenticationManager(authenticationManager);
-        // configure other properties on the filter as necessary
+        // Configure other properties on the filter as necessary
         return filter;
     }
 
