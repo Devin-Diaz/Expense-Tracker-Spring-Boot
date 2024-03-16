@@ -1,5 +1,6 @@
 package com.diaz.expense_tracker.controller;
 
+import com.diaz.expense_tracker.dto.UserDto;
 import com.diaz.expense_tracker.model.User;
 import com.diaz.expense_tracker.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class UserController {
     //getting login page data
     @GetMapping("/login")
     public String displayLoginForm() {
-        return "/login";
+        return "login";
     }
 
     //requesting to save data to database upon registering
@@ -34,10 +35,10 @@ public class UserController {
     //@RedirectAttributes - "I'm going to send the user to another page but I want them to see this message when
     //they get there. Please carry this message on to the next page.
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
-        userService.saveUser(user);
+    public String registerUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
+        userService.saveUser(userDto);
         redirectAttributes.addFlashAttribute("successMessage", "Registration Successful!");
-        return "redirect:/login";
+        return "redirect:login";
     }
 
 }

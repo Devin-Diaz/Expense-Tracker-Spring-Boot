@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<h1>Welcome to Your Dashboard!</h1>
+<p>This is a simple dashboard page to confirm the transition works.</p>
+
+ Optionally, display user-specific information
+ <p>Welcome, <span th:text="${user.name}">User</span>!</p>
+
+<!-- Logout link -->
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
+</body>
+</html>
