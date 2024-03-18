@@ -2,6 +2,7 @@ package com.diaz.expense_tracker.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -50,12 +51,20 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
 
 
     // authenticates the user
-    @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
+        String email = obtainUsername(request);
+        String password = obtainPassword(request);
 
-        return super.attemptAuthentication(request, response);
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(email, password);
+
+        // Allow subclasses to set the "details" property
+        setDetails(request, authRequest);
+
+        return this.getAuthenticationManager().authenticate(authRequest);
     }
+
+
 
 }
 
