@@ -38,7 +38,7 @@ public class UserController {
     public String registerUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
         userService.saveUser(userDto);
         redirectAttributes.addFlashAttribute("successMessage", "Registration Successful!");
-        return "redirect:login";
+        return "redirect:/login";
     }
 
 }

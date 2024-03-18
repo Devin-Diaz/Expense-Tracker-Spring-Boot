@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /* CSRF - Cross-Site-Request-Forgery. type of security vulnerability that tricks a web browser
@@ -63,19 +64,18 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .authorizeHttpRequests(authorization -> authorization
-                        .requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/register", "/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                
+
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/db", true)
+                        .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
                         .permitAll()
                 )
 
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
-
                 )
                 .addFilterBefore(customUsernamePasswordAuthenticationFilter(authenticationManagerBean()), UsernamePasswordAuthenticationFilter.class
 
@@ -87,6 +87,12 @@ public class SecurityConfig {
 //        http.authenticationProvider(daoAuthenticationProvider());
 
         return http.build();
+    }
+
+
+    @Bean
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 
 

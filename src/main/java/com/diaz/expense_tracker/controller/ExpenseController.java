@@ -19,7 +19,6 @@ public class ExpenseController {
     }
 
 
-
     @GetMapping("/db")
     public String showDashboard(Model model, Principal principal) {
         // Optional: Use the principal to fetch user-specific data
