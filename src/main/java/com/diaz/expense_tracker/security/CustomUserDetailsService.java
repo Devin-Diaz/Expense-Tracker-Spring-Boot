@@ -2,10 +2,13 @@ package com.diaz.expense_tracker.security;
 
 import com.diaz.expense_tracker.Repository.UserRepository;
 import com.diaz.expense_tracker.model.User;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import java.util.Collections;
 
 
@@ -24,7 +27,7 @@ import java.util.Collections;
 
 */
 
-
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
